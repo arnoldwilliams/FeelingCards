@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="456" height="456" viewBox="0 0 456 456" xmlns="http://www.w3.org/2000/svg">
+  <rect width="456" height="456" fill="#B03A72"/>
+  <circle cx="228" cy="196" r="96" fill="#FFFFFF"/>
+  <circle cx="196" cy="180" r="14" fill="#B03A72"/>
+  <circle cx="260" cy="180" r="14" fill="#B03A72"/>
+  <path d="M180 226 Q228 280 276 226" stroke="#B03A72" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <text x="228" y="392" font-family="DejaVu Sans" font-size="64" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Feelings</text>
+</svg>

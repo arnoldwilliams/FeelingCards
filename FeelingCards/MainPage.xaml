@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:FeelingCards.Models"
+             xmlns:vm="clr-namespace:FeelingCards.ViewModels"
+             x:Class="FeelingCards.MainPage"
+             x:DataType="vm:MainViewModel"
+             Title="Feeling Cards"
+             BackgroundColor="#FDF7FB">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16,12">
+
+        <Label Grid.Row="0"
+               Text="How would you feel if…"
+               FontFamily="DejaVuSansBold"
+               FontSize="24"
+               TextColor="#B03A72"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center" />
+
+        <CarouselView Grid.Row="1"
+                      x:Name="CardsCarousel"
+                      ItemsSource="{Binding Cards}"
+                      Position="{Binding Position, Mode=TwoWay}"
+                      IsBounceEnabled="True"
+                      IsSwipeEnabled="True"
+                      Loop="False"
+                      IndicatorView="CardIndicators"
+                      Margin="0,12">
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:FeelingCard">
+                    <Border Stroke="#F2C6DE"
+                            StrokeThickness="2"
+                            StrokeShape="RoundRectangle 24"
+                            BackgroundColor="White"
+                            Padding="12">
+                        <Grid RowDefinitions="*,Auto">
+                            <Image Grid.Row="0"
+                                   Source="{Binding Image}"
+                                   Aspect="AspectFit"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill" />
+                            <Label Grid.Row="1"
+                                   Text="{Binding Prompt}"
+                                   FontFamily="DejaVuSans"
+                                   FontSize="17"
+                                   TextColor="#444444"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="4,10,4,4" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12" Margin="0,4,0,0">
+            <Button Grid.Column="0"
+                    Text="◀ Previous"
+                    Command="{Binding PreviousCommand}"
+                    FontFamily="DejaVuSans"
+                    BackgroundColor="#B03A72"
+                    TextColor="White"
+                    CornerRadius="24"
+                    Padding="18,10" />
+
+            <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                <IndicatorView x:Name="CardIndicators"
+                               IndicatorColor="#EBC4DC"
+                               SelectedIndicatorColor="#B03A72"
+                               IndicatorSize="9"
+                               HorizontalOptions="Center" />
+                <Label Text="{Binding CounterText}"
+                       FontFamily="DejaVuSans"
+                       FontSize="13"
+                       TextColor="#8A6B7C"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <Button Grid.Column="2"
+                    Text="Next ▶"
+                    Command="{Binding NextCommand}"
+                    FontFamily="DejaVuSans"
+                    BackgroundColor="#B03A72"
+                    TextColor="White"
+                    CornerRadius="24"
+                    Padding="18,10" />
+        </Grid>
+    </Grid>
+</ContentPage>
