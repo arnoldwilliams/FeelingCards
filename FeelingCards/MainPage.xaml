@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FeelingCards.ViewModels"
+             x:Class="FeelingCards.MainPage"
+             x:DataType="vm:MainViewModel"
+             Title="Feeling Cards"
+             BackgroundColor="#FDF7FB">
+
+    <VerticalStackLayout Spacing="12" Padding="16,12">
+
+        <Label HeightRequest="44"
+               Text="How would you feel if…"
+               FontFamily="DejaVuSansBold"
+               FontSize="24"
+               TextColor="#B03A72"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center" />
+
+        <Border x:Name="CardBorder"
+                HeightRequest="460"
+                Stroke="#F2C6DE"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 24"
+                BackgroundColor="White"
+                Padding="12">
+            <Border.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding NextCommand}" />
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding PreviousCommand}" />
+            </Border.GestureRecognizers>
+            <VerticalStackLayout Spacing="10">
+                <Image HeightRequest="340"
+                       Source="{Binding CurrentCard.Image}"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Fill" />
+                <Label Text="{Binding CurrentCard.Prompt}"
+                       HeightRequest="60"
+                       FontFamily="DejaVuSans"
+                       FontSize="17"
+                       TextColor="#444444"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center" />
+            </VerticalStackLayout>
+        </Border>
+
+        <Grid HeightRequest="60" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+            <Button Grid.Column="0"
+                    Text="◀ Previous"
+                    Command="{Binding PreviousCommand}"
+                    FontFamily="DejaVuSans"
+                    BackgroundColor="#B03A72"
+                    TextColor="White"
+                    CornerRadius="24"
+                    Padding="16,10" />
+
+            <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Indicators}"
+                                       Spacing="6"
+                                       HorizontalOptions="Center">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <BoxView WidthRequest="9"
+                                     HeightRequest="9"
+                                     CornerRadius="5"
+                                     Color="{Binding}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </HorizontalStackLayout>
+                <Label Text="{Binding CounterText}"
+                       HeightRequest="18"
+                       FontFamily="DejaVuSans"
+                       FontSize="13"
+                       TextColor="#8A6B7C"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <Button Grid.Column="2"
+                    Text="Next ▶"
+                    Command="{Binding NextCommand}"
+                    FontFamily="DejaVuSans"
+                    BackgroundColor="#B03A72"
+                    TextColor="White"
+                    CornerRadius="24"
+                    Padding="16,10" />
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>
